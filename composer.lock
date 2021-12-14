@@ -4,8 +4,59 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4842c22e789d247c4b660e69490545f",
+    "content-hash": "e502001bbe4bc2db543c76a168d64aa3",
     "packages": [
+        {
+            "name": "asm/php-ansible",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maschmann/php-ansible.git",
+                "reference": "26809472cab66fb0175ae53f7281afd6b31d1296"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maschmann/php-ansible/zipball/26809472cab66fb0175ae53f7281afd6b31d1296",
+                "reference": "26809472cab66fb0175ae53f7281afd6b31d1296",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3.0|^8.0.0",
+                "psr/log": "^1.1",
+                "symfony/process": "^4.0|^5.0"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "^1.6",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Asm\\": "Asm"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Aschmann",
+                    "email": "maschmann@gmail.com"
+                }
+            ],
+            "description": "A PHP wrapper for Ansible.",
+            "homepage": "https://github.com/maschmann/php-ansible",
+            "keywords": [
+                "ansible",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/maschmann/php-ansible/issues",
+                "source": "https://github.com/maschmann/php-ansible/tree/v3.0.1"
+            },
+            "time": "2021-06-25T20:09:17+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.0.3",
