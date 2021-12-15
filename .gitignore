@@ -16,3 +16,4 @@ yarn-error.log
 /storage/keys
 /storage/inventories
 /packages
+/public/images
