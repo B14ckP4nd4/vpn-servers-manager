@@ -166,6 +166,9 @@ return [
          * Package Service Providers...
          */
 
+//        BlackPanda\TextManipulator\TextManipulatorServiceProvider::class,
+        BlackPanda\TextManipulator\TextManipulatorServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
