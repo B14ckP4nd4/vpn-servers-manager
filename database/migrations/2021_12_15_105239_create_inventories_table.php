@@ -15,6 +15,9 @@ class CreateInventoriesTable extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
+            $table->boolean('is_active')->default(1);
+            $table->dateTime('last_refresh')->nullable();
             $table->timestamps();
         });
     }
