@@ -7,9 +7,11 @@
     <title>Dashboard</title>
     <!-- CSS files -->
     <link href="{{asset('/css/dashboard/dashboard.css')}}" rel="stylesheet"/>
+    @livewireStyles
 </head>
 <body class="antialiased">
 {{$slot}}
 
+@livewireScripts
 </body>
 </html>
