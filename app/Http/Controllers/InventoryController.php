@@ -15,8 +15,7 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        $inventories = Inventory::OrderBy('id','desc')->get();
-        return view($this->viewPath."index",compact('inventories'));
+        return view($this->viewPath."index");
     }
 
     /**
@@ -26,7 +25,7 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        return view($this->viewPath . 'create');
+
     }
 
     /**
@@ -37,7 +36,7 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
-        return "this is store";
+
     }
 
     /**
@@ -48,7 +47,7 @@ class InventoryController extends Controller
      */
     public function show(Inventory $inventory)
     {
-        return "this is Show";
+
     }
 
     /**
@@ -59,7 +58,7 @@ class InventoryController extends Controller
      */
     public function edit(Inventory $inventory)
     {
-        return "this is edit";
+
     }
 
     /**
@@ -71,7 +70,7 @@ class InventoryController extends Controller
      */
     public function update(Request $request, Inventory $inventory)
     {
-        return "this is update";
+
     }
 
     /**
@@ -82,7 +81,5 @@ class InventoryController extends Controller
     public function destroy(Inventory $inventory)
     {
 
-        Inventory::find($inventory->id)->delete();
-        return back()->with('deleted', "inventory <span class='strong'>{$inventory->id}</span> deleted successfully");
     }
 }
