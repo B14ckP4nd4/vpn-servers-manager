@@ -15,6 +15,8 @@ class CreateInventoryItemsTable extends Migration
     {
         Schema::create('inventory_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('inventory_id')->constrained('inventories')->references('id')->cascadeOnDelete();
+            $table->string('server')->unique();
             $table->timestamps();
         });
     }
@@ -26,6 +28,9 @@ class CreateInventoryItemsTable extends Migration
      */
     public function down()
     {
+        Schema::table('inventory_items',function (Blueprint $table){
+            $table->dropForeign('inventory_items_inventory_id_foreign');
+        });
         Schema::dropIfExists('inventory_items');
     }
 }
