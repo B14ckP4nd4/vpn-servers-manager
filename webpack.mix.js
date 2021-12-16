@@ -11,8 +11,23 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
+mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/dashboard/dashboard.js', 'public/js/dashboard')
+    .js('resources/js/dashboard/apexcharts.js', 'public/js/dashboard')
+    .postCss('resources/css/app.css', 'public/css', [
     require('postcss-import'),
     require('tailwindcss'),
     require('autoprefixer'),
 ]);
+
+mix.webpackConfig((webpack) => {
+    return {
+        plugins: [
+            new webpack.ProvidePlugin({
+                $: "jquery",
+                jQuery: "jquery",
+                "window.jQuery": "jquery",
+            }),
+        ],
+    };
+});
