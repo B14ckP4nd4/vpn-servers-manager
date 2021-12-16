@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class InventoryController extends Controller
 {
+    protected $viewPath = "dashboard.inventories.";
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +15,8 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        //
+        $inventories = Inventory::OrderBy('id','desc')->get();
+        return view($this->viewPath."index",compact('inventories'));
     }
 
     /**
@@ -24,7 +26,7 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->viewPath . 'create');
     }
 
     /**
@@ -35,7 +37,7 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return "this is store";
     }
 
     /**
@@ -46,7 +48,7 @@ class InventoryController extends Controller
      */
     public function show(Inventory $inventory)
     {
-        //
+        return "this is Show";
     }
 
     /**
@@ -57,7 +59,7 @@ class InventoryController extends Controller
      */
     public function edit(Inventory $inventory)
     {
-        //
+        return "this is edit";
     }
 
     /**
@@ -69,17 +71,18 @@ class InventoryController extends Controller
      */
     public function update(Request $request, Inventory $inventory)
     {
-        //
+        return "this is update";
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Inventory  $inventory
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Inventory $inventory)
     {
-        //
+
+        Inventory::find($inventory->id)->delete();
+        return back()->with('deleted', "inventory <span class='strong'>{$inventory->id}</span> deleted successfully");
     }
 }
