@@ -95,11 +95,11 @@
     <script>
         function resetModals() {
             window.Livewire.emit('refreshModal');
-            document.getElementById('deleteModalContent').style.display="none";
-            document.getElementById('delete_modal_loading').style.display="block";
+            document.getElementById('deleteModalContent').style.display = "none";
+            document.getElementById('delete_modal_loading').style.display = "block";
         }
 
-        $('.removeItemBtn').on('click',function (e) {
+        $('.removeItemBtn').on('click', function (e) {
             return resetModals();
         })
     </script>
