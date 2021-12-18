@@ -36,7 +36,7 @@
                     </td>
                     <td class="text-start">
                         <a
-                            wire:click="removeItem({{$item->id}})"
+                            x-data @click="window.Livewire.emitTo('remove-inventory-item-modal','itemSelectedForDelete',{{$item->id}})"
                             @click="resetModals()"
                             class="btn btn-outline-danger removeItemBtn" data-bs-toggle="modal"
                             data-bs-target="#model_remove">
@@ -55,8 +55,9 @@
                             Remove
                         </a>
                         <a
+                            x-data @click="window.Livewire.emitTo('inventory-items-form-modal','editItem',{{$item->id}})"
                             data-bs-toggle="modal"
-                            data-bs-target="#modal_inventory_form"
+                            data-bs-target="#inventory-items-form"
                             class="btn btn-outline-info">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  class="icon icon-tabler icon-tabler-settings" width="24"
