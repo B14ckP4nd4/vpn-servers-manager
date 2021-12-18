@@ -1,5 +1,5 @@
 <div>
-    <div class="modal-body text-center py-4" >
+    <div class="modal-body text-center py-4">
         @if($itemID)
             <div id="deleteModalContent">
                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -35,23 +35,23 @@
 
                 <div class="text-muted">Please wait</div>
             </div>
-        @endif
-    </divx-data>
-    <div class="modal-footer">
-        <div class="w-100">
-            <div class="row">
-                <div wire:click="$set('itemID',null)" class="col"><a href="#" class="btn w-100"
-                                    data-bs-dismiss="modal">
-                        Cancel
-                    </a></div>
+            @endif
+            </divx-data>
+            <div class="modal-footer">
+                <div class="w-100">
+                    <div class="row">
+                        <div wire:click="$set('itemID',null)" class="col"><a href="#" class="btn w-100"
+                                                                             data-bs-dismiss="modal">
+                                Cancel
+                            </a></div>
 
-                <div class="col">
-                    <a wire:click="remove({{$itemID}})" class="btn btn-danger w-100">
-                        Delete Inventory
-                    </a>
-
+                        <div class="col">
+                            <a wire:click="remove({{$itemID}})" class="btn btn-danger w-100" data-bs-dismiss="modal">
+                                Delete Inventory
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
