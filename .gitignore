@@ -17,3 +17,4 @@ yarn-error.log
 /storage/inventories
 /packages
 /public/images
+/routes
