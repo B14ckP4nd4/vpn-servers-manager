@@ -49,36 +49,36 @@
             <div class="page-body">
                 <div class="container-xl">
                     <div class="row row-deck row-cards">
-{{--                        @if ($resultMessage)--}}
-{{--                            <div class="col-12">--}}
-{{--                                <div class="card">--}}
-{{--                                    <div class="card-status-bottom bg-success"></div>--}}
-{{--                                    <div class="card-body">--}}
-{{--                                        <h3 class="card-title">Result</h3>--}}
-{{--                                        <p>{!! $resultMessage !!}</p>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        @endif--}}
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Inventory Items</h3>
                                 </div>
                                 <livewire:inventory-items-list></livewire:inventory-items-list>
+                                <!-- inventory item remove modal -->
                                 <div class="modal modal-blur fade" id="model_remove" tabindex="-1"
-                                     aria-hidden="true" x-data="{ x : 2}" >
-                                    <div @click-away="window.livewire.emit('refreshModal');" class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                                     aria-hidden="true" x-data="{ x : 2}">
+                                    <div @click-away="window.livewire.emit('refreshModal');"
+                                         class="modal-dialog modal-sm modal-dialog-centered" role="document">
 
                                         <div class="modal-content">
-                                            <button wire:click="resetModals()" type="button" class="btn-close" data-bs-dismiss="modal"
+                                            <button wire:click="resetModals()" type="button" class="btn-close"
+                                                    data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             <div class="modal-status bg-danger"></div>
-                                                <livewire:remove-inventory-item-modal></livewire:remove-inventory-item-modal>
+                                            <livewire:remove-inventory-item-modal></livewire:remove-inventory-item-modal>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- inventory edit modal -->
+                                <!-- inventory edit modal -->
+                                <div x-date @click.away="window.Livewire.emitTo('inventory-items-form-modal','cancel')" class="modal modal-blur fade" id="inventory-items-form" tabindex="-1" role="dialog"
+                                     aria-hidden="true">
 
+                                    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                                        <livewire:inventory-items-form-modal></livewire:inventory-items-form-modal>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
