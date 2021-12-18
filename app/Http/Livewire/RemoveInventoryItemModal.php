@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\InventoryItem;
 use Livewire\Component;
 
 class RemoveInventoryItemModal extends Component
@@ -23,5 +24,12 @@ class RemoveInventoryItemModal extends Component
 
     public function refreshModal(){
         $this->itemID = null;
+    }
+
+    public function remove($id)
+    {
+        InventoryItem::findOrFail($id)->delete();
+        $this->refreshModal();
+        $this->emit('itemRemoved');
     }
 }
