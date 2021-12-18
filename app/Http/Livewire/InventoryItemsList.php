@@ -9,6 +9,11 @@ class InventoryItemsList extends Component
 {
     public $inventoryItems;
 
+    protected $listeners = [
+      'itemRemoved' => '$refresh',
+      'pleaseRefresh' => '$refresh',
+    ];
+
     public function render()
     {
         $this->inventoryItems = InventoryItem::orderBy('id','desc')->get();
