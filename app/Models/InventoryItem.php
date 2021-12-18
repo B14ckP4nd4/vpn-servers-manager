@@ -9,6 +9,9 @@ class InventoryItem extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+    protected $fillable = ['server','inventory_id'];
+
 
     public function inventory()
     {
