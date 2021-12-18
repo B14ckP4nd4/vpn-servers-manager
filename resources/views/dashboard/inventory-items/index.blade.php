@@ -11,7 +11,7 @@
                                 Overview
                             </div>
                             <h2 class="page-title">
-                                Inventories list
+                                Inventories Items list
                             </h2>
                         </div>
                         <!-- Page title actions -->
@@ -63,7 +63,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Inventories</h3>
+                                    <h3 class="card-title">Inventory Items</h3>
                                 </div>
                                 <livewire:inventory-items-list></livewire:inventory-items-list>
                                 <div class="modal modal-blur fade" id="model_remove" tabindex="-1"
