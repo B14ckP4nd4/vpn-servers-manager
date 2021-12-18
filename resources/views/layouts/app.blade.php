@@ -8,10 +8,12 @@
     <!-- CSS files -->
     <link href="{{asset('/css/dashboard/dashboard.css')}}" rel="stylesheet"/>
     @livewireStyles
-
-    @livewireScripts
 </head>
 <body class="antialiased">
 {{$slot}}
+
+@livewireScripts
+
+<script src="{{asset('js/app.js?'. time())}}"></script>
 </body>
 </html>
