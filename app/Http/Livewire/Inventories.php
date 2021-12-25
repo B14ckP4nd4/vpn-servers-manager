@@ -14,6 +14,10 @@ class Inventories extends Component
     public $editModal = false;
     public $createModal = false;
 
+    protected $listeners = [
+        'pleaseRefresh' => '$refresh'
+    ];
+
     protected $rules = [
         'name' => 'required|string|min:4|max:255|unique:inventories,name',
         'is_active' => 'required|boolean'
