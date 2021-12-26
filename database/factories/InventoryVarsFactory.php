@@ -7,7 +7,7 @@ namespace Database\Factories;
 use App\Models\Inventory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class InventoryVarsFactory extends Factory
+class InventoryVarFactory extends Factory
 {
     /**
      * Define the model's default state.
