@@ -35,23 +35,24 @@
 
                 <div class="text-muted">Please wait</div>
             </div>
-            @endif
-            </divx-data>
-            <div class="modal-footer">
-                <div class="w-100">
-                    <div class="row">
-                        <div wire:click="$set('itemID',null)" class="col"><a href="#" class="btn w-100"
-                                                                             data-bs-dismiss="modal">
-                                Cancel
-                            </a></div>
+        @endif
+    </div>
+    <div class="modal-footer">
+        <div class="w-100">
+            <div class="row">
+                <div wire:click="$set('itemID',null)" class="col"><a href="#" class="btn w-100"
+                                                                     data-bs-dismiss="modal">
+                        Cancel
+                    </a></div>
 
-                        <div class="col">
-                            <a wire:click="remove({{$itemID}})" class="btn btn-danger w-100" data-bs-dismiss="modal">
-                                Delete Inventory
-                            </a>
-                        </div>
+                @if($itemID)
+                    <div class="col">
+                        <a wire:click="remove({{$itemID}})" class="btn btn-danger w-100" data-bs-dismiss="modal">
+                            Delete Inventory
+                        </a>
                     </div>
-                </div>
+                @endif
             </div>
+        </div>
     </div>
 </div>
