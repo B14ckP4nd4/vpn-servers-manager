@@ -7,6 +7,7 @@
     <title>Dashboard</title>
     <!-- CSS files -->
     <link href="{{asset('/css/dashboard/dashboard.css')}}" rel="stylesheet"/>
+    <link rel="shortcut icon" href="{{ asset('/images/fav.ico') }}" />
     @livewireStyles
 </head>
 <body class="antialiased">
