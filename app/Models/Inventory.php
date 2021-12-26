@@ -21,4 +21,12 @@ class Inventory extends Model
     public function items(){
         return $this->hasMany(InventoryItem::class);
     }
+
+    /**
+     * determine vars relation
+     * @return HasMany
+     */
+    public function vars(){
+        return $this->hasMany(InventoryVar::class , 'inventory_id','id');
+    }
 }
