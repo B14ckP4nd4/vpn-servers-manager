@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Inventory;
 use App\Models\InventoryItem;
 use App\Models\InventoryVar;
+use App\Models\PlayBooks;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
         Inventory::factory(10)->create();
         InventoryItem::factory(80)->create();
         InventoryVar::factory(30)->create();
+        PlayBooks::factory(20)->create();
     }
 }
