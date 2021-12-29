@@ -40,9 +40,6 @@ class refreshInventoryFile extends Command
     public function __construct()
     {
         parent::__construct();
-
-        $this->inventories = Inventory::orderBy('id','ASC')->get();
-        $this->inventories_path = config('ansible.inventories_path');
     }
 
     /**
@@ -52,6 +49,11 @@ class refreshInventoryFile extends Command
      */
     public function handle()
     {
+        //set Data
+        $this->inventories = Inventory::orderBy('id','ASC')->get();
+        $this->inventories_path = config('ansible.inventories_path');
+
+
         foreach ($this->inventories as $inventory){
             $filename = AnsibleFileManager::clearName($inventory->name , 'ini');
             $inventoryHosts = $inventory->items()->get()->pluck('server')->toArray();
