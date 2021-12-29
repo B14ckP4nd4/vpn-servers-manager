@@ -27,6 +27,6 @@ class Inventory extends Model
      * @return HasMany
      */
     public function vars(){
-        return $this->hasMany(InventoryVar::class , 'inventory_id','id');
+        return $this->hasMany(InventoryVar::class, 'inventory_id','id');
     }
 }
