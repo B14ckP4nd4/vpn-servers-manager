@@ -16,10 +16,10 @@
                         </div>
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
-                            <div class="btn-list">
-                                <a x-data @click="window.Livewire.emitTo('inventory-items-form-modal','createItem')" href="#"
+                            <div class="btn-list" x-data >
+                                <a @click="window.Livewire.emitTo('create-inventory-var','pleaseRefresh')" href="#"
                                    class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
-                                   data-bs-target="#inventory-items-form">
+                                   data-bs-target="#create-inventory-var">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                          viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -68,6 +68,16 @@
                             </div>
                         </div>
                         <!-- end Inventory var -->
+
+                        <!--create Inventory var -->
+                        <div class="modal modal-blur fade" id="create-inventory-var" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <livewire:create-inventory-var></livewire:create-inventory-var>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- create Inventory var -->
 
 
                         <!-- var remove modal -->
