@@ -18,3 +18,4 @@ yarn-error.log
 /packages
 /public/images
 /routes
+/storage/ansible
