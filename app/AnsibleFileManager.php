@@ -4,6 +4,10 @@
 namespace App;
 
 
+use App\Models\InventoryItem;
+use App\Models\InventoryVar;
+use Illuminate\Support\Collection;
+
 class AnsibleFileManager
 {
     /**
@@ -30,6 +34,36 @@ class AnsibleFileManager
             $file_name = $file_name . '.' . $extension;
 
         return $file_name;
+    }
+
+
+    /**
+     * generate inventory file content from the base data
+     * @param Collection $hosts
+     * @param array $vars
+     * @return string
+     */
+    public static function generateInventoryFile(Collection $hosts, array $vars)
+    {
+        $content = [];
+
+        // set hosts
+        foreach ($hosts as $host)
+        {
+            $content[] = $host->server;
+        }
+
+        // set vars
+        if(!empty($vars)){
+            $content[] = "[all:vars]";
+
+            foreach ($vars as $var){
+                $value = str_replace("'", "\\'", $var['val']);
+                $content[] = "{$var['name']}='$value'";
+            }
+        }
+
+        return implode("\n",$content);
     }
 
 }
