@@ -66,4 +66,35 @@ class AnsibleFileManager
         return implode("\n",$content);
     }
 
+
+    /**
+     * save the content and set permission
+     * @param string $fileName
+     * @param string $path
+     * @param string $content
+     * @return string
+     */
+    public static function saveFile($fileName, $path, $content = null){
+        $fileName = ltrim($fileName, '/');
+        $path = rtrim($path , '/');
+
+        $fullPath = $path . '/' . $fileName;
+
+        if(file_exists($fullPath)){
+            $newFile = fopen($fullPath,"w+");
+            fwrite($newFile, $content);
+            fclose($newFile);
+        }
+        else
+        {
+            $newFile= fopen($fullPath, 'w+');
+            fwrite($newFile, $content);
+            fclose($newFile);
+
+            chmod($fullPath, 0664);
+        }
+
+        return $fullPath;
+    }
+
 }
