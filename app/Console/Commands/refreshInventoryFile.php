@@ -107,6 +107,7 @@ class refreshInventoryFile extends Command
             $savedFile = AnsibleFileManager::saveFile($filename, $this->inventories_path, $content);
 
             $inventory->last_refresh = date('Y-m-d H:i:s');
+            $inventory->path = $savedFile;
             $inventory->save();
 
 
