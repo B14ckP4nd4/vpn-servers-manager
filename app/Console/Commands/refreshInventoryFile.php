@@ -72,7 +72,7 @@ class refreshInventoryFile extends Command
             {
                 // ignore if inventory items and vars didnt have any change
                 if( !$this->hasVarChanges($inventory) && !$this->hasHostsChanges($inventory))
-                    continue(2);
+                    continue;
             }
 
             // ignore if inventory hasn't any host
