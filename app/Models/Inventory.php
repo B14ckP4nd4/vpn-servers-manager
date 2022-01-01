@@ -29,4 +29,14 @@ class Inventory extends Model
     public function vars(){
         return $this->hasMany(InventoryVar::class, 'inventory_id','id');
     }
+
+
+    /**
+     * determine play relation
+     * @return HasMany
+     */
+    public function plays()
+    {
+        return $this->hasMany(Play::class, 'inventory_id', 'id');
+    }
 }
