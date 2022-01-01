@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\PlayBookAdded;
+use App\Events\PlayCompleted;
 use App\Listeners\DownloadPlayBook;
+use App\Listeners\processPlayLogs;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -24,6 +26,10 @@ class EventServiceProvider extends ServiceProvider
 
         PlayBookAdded::class => [
             DownloadPlayBook::class,
+        ],
+
+        PlayCompleted::class => [
+            processPlayLogs::class,
         ]
     ];
 
