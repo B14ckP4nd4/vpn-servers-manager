@@ -33,4 +33,9 @@ class Play extends Model
         return $this->belongsTo(PlayBooks::class, 'playbook_id','id');
     }
 
+
+    public function inventory()
+    {
+        return $this->belongsTo(Inventory::class, 'inventory_id','id');
+    }
 }
