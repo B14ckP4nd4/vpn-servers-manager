@@ -24,7 +24,7 @@ class CreatePlaysTable extends Migration
             $table->integer('skipped')->default(0)->unsigned();
             $table->integer('rescued')->default(0)->unsigned();
             $table->integer('ignored')->default(0)->unsigned();
-            $table->boolean('completed')->default(0);
+            $table->text('log_file')->nullable();
             $table->boolean('is_running')->default(0);
             $table->dateTime('run_at')->nullable();
             $table->dateTime('completed_at')->nullable();
