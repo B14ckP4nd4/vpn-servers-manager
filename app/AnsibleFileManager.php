@@ -75,11 +75,16 @@ class AnsibleFileManager
      * @param string $content
      * @return string
      */
-    public static function saveFile($fileName, $path, $content = null){
-        $fileName = ltrim($fileName, '/');
-        $path = rtrim($path , '/');
-
-        $fullPath = $path . '/' . $fileName;
+    public static function saveFile($fileName, $path = null, $content = null,$append = false){
+        if(!is_null($path)){
+            $fileName = ltrim($fileName, '/');
+            $path = rtrim($path , '/');
+            $fullPath = $path . '/' . $fileName;
+        }
+        else
+        {
+            $fullPath = $fileName;
+        }
 
         if(file_exists($fullPath)){
             $newFile = fopen($fullPath,"w+");
@@ -89,6 +94,10 @@ class AnsibleFileManager
         else
         {
             $newFile= fopen($fullPath, 'w+');
+
+            if($append)
+                $newFile= fopen($fullPath, 'w');
+
             fwrite($newFile, $content);
             fclose($newFile);
 
