@@ -19,7 +19,7 @@ class Play extends Model
         'skipped',
         'rescued',
         'ignored',
-        'path',
+        'log_file',
         'is_running',
         'run_at',
         'completed_at',
@@ -38,4 +38,13 @@ class Play extends Model
     {
         return $this->belongsTo(Inventory::class, 'inventory_id','id');
     }
+
+    public function scopePending($query)
+    {
+        return $query->where([
+            ['run_at','=',null],
+            ['is_running','=',0],
+        ]);
+    }
+
 }
