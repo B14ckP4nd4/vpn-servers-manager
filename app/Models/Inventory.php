@@ -12,7 +12,7 @@ class Inventory extends Model
 
     protected $guarded = ['id'];
 
-    protected $fillable = ['name','is_active'];
+    protected $fillable = ['name','path','is_active'];
 
     /**
      * determine items relation
