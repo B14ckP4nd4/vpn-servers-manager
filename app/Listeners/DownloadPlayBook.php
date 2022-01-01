@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\AnsibleFileManager;
 use App\Events\PlayBookAdded;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -39,21 +40,21 @@ class DownloadPlayBook implements ShouldQueue
         /*
          * determine saving path
          */
-        $file_name= $this->clearTheName($playbook->name);
-        $savePath = config('ansible.playbook_path').$file_name;
+        $file_name= AnsibleFileManager::clearName($playbook->name,'yml');
+        $savePath = config('ansible.playbook_path');
 
         /*
          * download and save the file to storage and playbooks path
          */
         $data = $this->downloadFile( $playbook->url );
-        file_put_contents( $savePath, $data );
+        $playBookPath = AnsibleFileManager::saveFile($file_name, $savePath, $data);
 
         /*
          * update PlayBook
          */
         $playbook->update([
             'name' => $file_name,
-            'path' => $savePath,
+            'path' => $playBookPath,
             'last_updated_at' => Carbon::now(),
         ]);
     }
@@ -69,12 +70,4 @@ class DownloadPlayBook implements ShouldQueue
         return $data;
     }
 
-    protected function clearTheName($name){
-        $file_name = str_replace(' ', '-', $name);
-        $file_name = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file_name);;
-        $file_name = preg_replace('/[^A-Za-z0-9\-]/', '', $file_name);
-        $file_name = $file_name . '.yml';
-
-        return $file_name;
-    }
 }
