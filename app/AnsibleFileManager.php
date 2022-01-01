@@ -28,9 +28,10 @@ class AnsibleFileManager
     public static function clearName($name, $extension = false){
         $file_name = str_replace(' ', '-', $name);
         $file_name = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file_name);;
-        $file_name = preg_replace('/[^A-Za-z0-9\-]/', '', $file_name);
+        $file_name = preg_replace('/[^A-Za-z0-9\-_]/', '', $file_name);
 
         if($extension)
+            $extension = ltrim($extension,'.');
             $file_name = $file_name . '.' . $extension;
 
         return $file_name;
