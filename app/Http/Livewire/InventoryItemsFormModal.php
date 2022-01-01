@@ -43,7 +43,7 @@ class InventoryItemsFormModal extends Component
         $inventory_item = InventoryItem::findOrFail($id);
 
         $this->item_id = $inventory_item->id;
-        $this->server = $inventory_item->server;
+        $this->server = trim($inventory_item->server);
         $this->inventory_id = $inventory_item->inventory_id;
 
         $this->toggle = true;
@@ -63,7 +63,7 @@ class InventoryItemsFormModal extends Component
         $this->validate();
 
         $newItem = InventoryItem::create([
-            'server' => $this->server,
+            'server' => trim($this->server),
             'inventory_id' => $this->inventory_id,
         ])->save();
 
@@ -82,7 +82,7 @@ class InventoryItemsFormModal extends Component
 
 
         $update = InventoryItem::findOrFail($this->item_id)->update([
-            'server' => $this->server,
+            'server' => trim($this->server),
             'inventory_id' => $this->inventory_id,
         ]);
 
