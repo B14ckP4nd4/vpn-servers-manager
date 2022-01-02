@@ -15,9 +15,8 @@
                 </th>
                 <th>Inventory</th>
                 <th>PlayBook</th>
-                <th>status</th>
-                <th>run_at</th>
-                <th>completed_at</th>
+                <th>Stats</th>
+                <th>Status</th>
                 <th></th>
 
             </tr>
@@ -29,25 +28,64 @@
                         <span class="text-muted">{{$play->id}}</span>
                     </td>
                     <td>
-                        <a href="" class="text-reset" tabindex="-1">{{$play->id}}</a>
-                        <a href="{{$play->id}}">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/link -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" /><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" /></svg>
-                        </a>
+                        {{$play->inventory()->first()->name}}
                     </td>
                     <td>
-                        {{ $play->id }}
+                        {{ $play->playbook()->first()->name }}
                     </td>
                     <td>
-                        {{$play->id}}
+                        <span class="text-success">OK : {{$play->ok}}</span> ,
+                        <span class="text-indigo">Changed : {{$play->changed}}</span> ,
+                        <span class="text-danger">Unreachable : {{$play->unreachable}}</span> ,
+                        <span class="text-warning">Skipped : {{$play->skipped}}</span> ,
+                        <span class="text-green-600">Rescued : {{$play->rescued}}</span> ,
+                        <text class="text-muted">Ignored : {{$play->ignored}}</text>
+                    </td>
+                    <td>
+                        @if($play->is_running)
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-run" width="44"
+                                 height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00b341" fill="none"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="13" cy="4" r="1"/>
+                                <path d="M4 17l5 1l.75 -1.5"/>
+                                <path d="M15 21l0 -4l-4 -3l1 -6"/>
+                                <path d="M7 12l0 -3l5 -1l3 3l3 1"/>
+                            </svg>
+                            Running...
+                            <div class="font-semibold">{{$play->run_at}}</div>
+                        @elseif(!$play->is_running && !$play->completed_at)
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time"
+                                 width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff9300"
+                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4"/>
+                                <circle cx="18" cy="18" r="4"/>
+                                <path d="M15 3v4"/>
+                                <path d="M7 3v4"/>
+                                <path d="M3 11h16"/>
+                                <path d="M18 16.496v1.504l1 1"/>
+                            </svg>
+                            Waiting for Run
+                        @elseif($play->completed_at)
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checkbox"
+                                 width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00b341"
+                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <polyline points="9 11 12 14 20 6"/>
+                                <path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"/>
+                            </svg>
+                            <span class="font-semibold"> Completed </span>
+                            <div class="text-start text-muted small">{{$play->completed_at}}</div>
+                        @endif
                     </td>
                     <td x-data class="text-start">
                         <a
                             @click="window.Livewire.emitTo('remove-play','selectForRemove',{{$play->id}})"
-                            class="btn btn-outline-danger removeItemBtn" data-bs-toggle="modal"
+                            class="m-0 p-2 btn btn-outline-danger removeItemBtn " data-bs-toggle="modal"
                             data-bs-target="#remove-play-modal">
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                 class="icon icon-tabler icon-tabler-trash" width="24" height="24"
+                                 class="m-0 icon icon-tabler icon-tabler-trash" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                  fill="none"
                                  stroke-linecap="round" stroke-linejoin="round">
@@ -58,15 +96,14 @@
                                 <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
                                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
                             </svg>
-                            Remove
                         </a>
                         <a
                             x-data @click="window.Livewire.emitTo('edit-play-books','selectForEdit',{{$play->id}})"
                             data-bs-toggle="modal"
                             data-bs-target="#edit-playbook"
-                            class="btn btn-outline-info">
+                            class="m-0 p-2 btn btn-outline-info">
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                 class="icon icon-tabler icon-tabler-settings" width="24"
+                                 class="m-0 icon icon-tabler icon-tabler-settings" width="24"
                                  height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                  fill="none"
@@ -76,52 +113,36 @@
                                     d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
                                 <circle cx="12" cy="12" r="3"></circle>
                             </svg>
-                            Edit
                         </a>
                         <a
-                            x-data @click="window.Livewire.emitTo('inventory-items-form-modal','editItem',{{$play->id}})"
+                            x-data
+                            @click="window.Livewire.emitTo('play-logs','getLogs',{{$play->id}})"
                             data-bs-toggle="modal"
-                            data-bs-target="#inventory-items-form"
-                            class="btn btn-outline-success">
+                            data-bs-target="#view-logs-modal"
+                            class="m-0 p-2 btn btn-outline-success">
+
+
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  class="icon icon-tabler icon-tabler-settings" width="24"
                                  height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                  fill="none"
                                  stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="12" cy="12" r="2"/>
                                 <path
-                                    d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
+                                    d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"/>
                             </svg>
-                            Update
-                        </a>
-                        <a
-                            x-data @click="window.Livewire.emitTo('inventory-items-form-modal','editItem',{{$play->id}})"
-                            data-bs-toggle="modal"
-                            data-bs-target="#inventory-items-form"
-                            class="btn btn-outline-warning">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 class="icon icon-tabler icon-tabler-settings" width="24"
-                                 height="24"
-                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                 fill="none"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path
-                                    d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                            View
+                            Logs
                         </a>
                     </td>
                 </tr>
             @empty
                 <tr>
-                    <td> - </td>
-                    <td> - </td>
-                    <td> - </td>
-                    <td> - </td>
+                    <td> -</td>
+                    <td> -</td>
+                    <td> -</td>
+                    <td> -</td>
                 </tr>
             @endforelse
             </tbody>
