@@ -44,6 +44,7 @@ class Play extends Model
         return $query->where([
             ['run_at','=',null],
             ['is_running','=',0],
+            ['completed_at','=', null],
         ]);
     }
 
