@@ -57,8 +57,8 @@ class RunAnsiblePlayBooks extends Command
 
             $play->update([
                 'log_file' => $logFile,
-//                'run_at' => Carbon::now(),
-//                'is_running' => 1,
+                'run_at' => Carbon::now(),
+                'is_running' => 1,
             ]);
 
 
@@ -72,10 +72,11 @@ class RunAnsiblePlayBooks extends Command
 
             $logFile = AnsibleFileManager::saveFile($logFile, null, $run);
 
-//            $play->update([
-//                'completed_at' => Carbon::now(),
-//                'is_running' => 0,
-//            ]);
+            $play->update([
+                'completed_at' => Carbon::now(),
+                'is_running' => 0,
+                'log_file' => $logFile,
+            ]);
 
             PlayCompleted::dispatch($play);
         }
