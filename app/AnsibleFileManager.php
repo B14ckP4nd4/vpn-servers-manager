@@ -125,4 +125,35 @@ class AnsibleFileManager
 
         return $contents;
     }
+
+    /**
+     * parse the log of the plays
+     * @param $content
+     * @return array|bool
+     */
+    public static function parsePlayLog($content)
+    {
+        preg_match_all("%((?<host>[\d{1,3}\.]+).*ok=(?<ok>\d+).*changed=(?<changed>\d+).*unreachable=(?<unreachable>\d+).*skipped=(?<skipped>\d+).*rescued=(?<rescued>\d+).*ignored=(?<ignored>\d+)\s+?)%m",$content,$matches);
+
+        if(empty($matches))
+            return false;
+
+        $itemsCount = count($matches[0]);
+
+        $runsStat = [];
+        for($i=0;$i<$itemsCount;$i++){
+            $runsStat[] = [
+                'host' => $matches['host'][$i],
+                'ok' => $matches['ok'][$i],
+                'changed' => $matches['changed'][$i],
+                'unreachable' => $matches['unreachable'][$i],
+                'skipped' => $matches['skipped'][$i],
+                'rescued' => $matches['rescued'][$i],
+                'ignored' => $matches['ignored'][$i],
+            ];
+        }
+
+        return $runsStat;
+    }
+
 }
