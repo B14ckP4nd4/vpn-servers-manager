@@ -63,6 +63,21 @@
 
                         <!-- Modals -->
 
+                        <!-- Begin View Logs Modal -->
+                        <div class="modal modal-blur fade" id="view-logs-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Logs</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <livewire:play-logs></livewire:play-logs>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End View Logs Modal -->
+
+
                         <!-- edit playbook Modal -->
                         <div class="modal modal-blur fade" id="edit-playbook" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
