@@ -107,4 +107,22 @@ class AnsibleFileManager
         return $fullPath;
     }
 
+    /**
+     * load a file
+     * @param $filePath
+     * @return false|string
+     * @throws \Exception
+     */
+    public static function loadFile($filePath)
+    {
+        if(!file_exists($filePath))
+            return false;
+
+        // get contents of a file into a string
+        $handle = fopen($filePath, "r");
+        $contents = fread($handle, filesize($filePath));
+        fclose($handle);
+
+        return $contents;
+    }
 }
