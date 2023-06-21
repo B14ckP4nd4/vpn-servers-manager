@@ -135,13 +135,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('dashboard.playbooks') }}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="44"
+                           height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none"
+                           stroke-linecap="round" stroke-linejoin="round">
                           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                          <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-                          <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-                          <line x1="3" y1="6" x2="3" y2="19" />
-                          <line x1="12" y1="6" x2="12" y2="19" />
-                          <line x1="21" y1="6" x2="21" y2="19" />
+                          <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/>
+                          <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/>
+                          <line x1="3" y1="6" x2="3" y2="19"/>
+                          <line x1="12" y1="6" x2="12" y2="19"/>
+                          <line x1="21" y1="6" x2="21" y2="19"/>
                         </svg>
                     </span>
                             <span class="nav-link-title">
@@ -152,13 +154,34 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('dashboard.plays') }}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-play" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-play"
+                           width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none"
+                           stroke-linecap="round" stroke-linejoin="round">
                           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                          <path d="M7 4v16l13 -8z" />
+                          <path d="M7 4v16l13 -8z"/>
                       </svg>
                     </span>
                             <span class="nav-link-title">
                                 Plays
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('dashboard.series') }}">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alien" width="24"
+                               height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                               stroke-linecap="round" stroke-linejoin="round">
+                           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                           <path d="M11 17a2.5 2.5 0 0 0 2 0"></path>
+                           <path
+                               d="M12 3c-4.664 0 -7.396 2.331 -7.862 5.595a11.816 11.816 0 0 0 2 8.592a10.777 10.777 0 0 0 3.199 3.064c1.666 1 3.664 1 5.33 0a10.777 10.777 0 0 0 3.199 -3.064a11.89 11.89 0 0 0 2 -8.592c-.466 -3.265 -3.198 -5.595 -7.862 -5.595z"></path>
+                           <line x1="8" y1="11" x2="10" y2="13"></line>
+                           <line x1="16" y1="11" x2="14" y2="13"></line>
+                      </svg>
+                    </span>
+                            <span class="nav-link-title">
+                                Series
                             </span>
                         </a>
                     </li>

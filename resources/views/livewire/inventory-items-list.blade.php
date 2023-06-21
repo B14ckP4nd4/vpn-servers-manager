@@ -1,4 +1,4 @@
-<div>
+<div wire:poll.keep-alive>
     <div class="table-responsive">
         <table class="table card-table table-vcenter text-nowrap datatable">
             <thead>

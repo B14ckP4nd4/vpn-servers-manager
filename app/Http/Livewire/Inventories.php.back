@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use App\Models\Inventory;
+use Livewire\Component;
+
+class Inventories extends Component
+{
+    public $inventories;
+
+    protected $rules = [
+        'name' => 'required|string|min:4|max:255|unique:inventories,name',
+        'is_active' => 'required|boolean'
+    ];
+
+    public function render()
+    {
+        $this->inventories = Inventory::orderBy('id','desc')->get();
+        return view('livewire.inventories');
+    }
+}

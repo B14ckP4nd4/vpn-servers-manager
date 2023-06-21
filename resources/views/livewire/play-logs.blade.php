@@ -1,4 +1,4 @@
-<div>
+<div wire.pull="getLogs" wire:poll.5s>
     <div class="modal-body">
             <div>
                 <textarea name="" id="" style="white-space: pre-wrap;" cols="130" rows="30" class="modal-full-width p-1 disabled" disabled>

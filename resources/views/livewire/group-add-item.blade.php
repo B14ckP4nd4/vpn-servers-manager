@@ -1,21 +1,16 @@
 <div>
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">{{  ( ! $updateMode ? "Create New Item" : "Update Item") }}</h5>
+            <h5 class="modal-title">Create Group of items</h5>
 
             <button type="button" class="btn-close" data-bs-dismiss="modal"
                     aria-label="Close"></button>
         </div>
         @if($toggle)
             <div class="modal-body">
-
-                @if($updateMode)
-                    <input wire:model="item_id" type="hidden"/>
-                @endif
                 <div class="mb-3">
-                    <label class="form-label">Server</label>
-                    <input type="text" class="form-control" wire:model="server"
-                           placeholder="Your report name">
+                    <label class="form-label">Servers</label>
+                    <textarea class="form-control" wire:model="servers" rows="6" placeholder="server separated by new line.." spellcheck="false"></textarea>
                     @error('server') <span class="error">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-3">
@@ -33,12 +28,12 @@
                 <a href="#" wire:click="$emitSelf('cancel')" class="btn btn-link link-secondary" data-bs-dismiss="modal">
                     Cancel
                 </a>
-                @if($updated || $created)
+                @if($created)
                     <a href="#" wire:click="$emitSelf('cancel')" class="btn btn-success ms-auto" data-bs-dismiss="modal">
                         Done
                     </a>
                 @else
-                    <a wire:click="{{  ( !$updateMode ? "addItem()" : "updateItem()") }}" href="#" class="btn btn-primary ms-auto">
+                    <a wire:click="addItem()" href="#" class="btn btn-primary ms-auto">
                         <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
 
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
@@ -49,7 +44,7 @@
                             <line x1="12" y1="5" x2="12" y2="19"></line>
                             <line x1="5" y1="12" x2="19" y2="12"></line>
                         </svg>
-                        {{  ( !$updateMode ? "Create new report" : "Update Item") }}
+                        Add Items
                     </a>
 
                 @endif

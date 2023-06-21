@@ -18,6 +18,6 @@ return [
     'default_username' => env('ANSIBLE_USERNAME','root'),
     'default_password' => env('ANSIBLE_PASSWORD','NkxU9gt37Ak8CWhv'),
     'default_configured_username' => env('ANSIBLE_CONFIGURED_USERNAME','masterAnsible'),
-    'private_key' => env('ANSIBLE_PRIVATE_KEY','ssh-auth'),
+    'private_key' => env('ANSIBLE_PRIVATE_KEY','/root/.ssh/ssh_key'),
     'public_key' => env('ANSIBLE_PRIVATE_KEY','ssh-auth.pub'),
 ];

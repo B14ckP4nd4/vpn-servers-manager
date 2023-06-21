@@ -7,6 +7,7 @@ use App\Events\PlayBookAdded;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class DownloadPlayBook implements ShouldQueue
 {
@@ -16,6 +17,8 @@ class DownloadPlayBook implements ShouldQueue
 
     public $tries = 5;
 
+    protected $gitHubToken;
+
 
     /**
      * Create the event listener.
@@ -24,7 +27,7 @@ class DownloadPlayBook implements ShouldQueue
      */
     public function __construct()
     {
-        //
+        $this->gitHubToken = getenv('GITHUB_TOKEN',null);
     }
 
     /**
@@ -60,9 +63,19 @@ class DownloadPlayBook implements ShouldQueue
     }
 
     protected function downloadFile($url){
+
         $ch = curl_init();
+
+        $headers = array(
+            "Authorization: token {$this->gitHubToken}",
+            "Accept: application/vnd.github.VERSION.raw",
+        );
+
         curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_URL, $url);
         $data = curl_exec($ch);
         curl_close($ch);

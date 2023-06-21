@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Artisan;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,7 +18,17 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('clear:known')->everyMinute();
         $schedule->command('ansible:refresh')->everyMinute();
+        $schedule->command('ansible:play')->everyMinute();
+        $schedule->command('ansible:check')->everyMinute();
+        $schedule->command('ansible:prepare')->everyMinute();
+        $schedule->command('series:check')->everyMinute();
+        $schedule->command('playbooks:update')->daily();
+
+        $schedule->command('logs:clear')->weekly();
+        $schedule->command('view:clear')->hourly();
+        $schedule->command('cache:clear')->hourly();
     }
 
     /**

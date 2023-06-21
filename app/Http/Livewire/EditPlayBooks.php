@@ -54,10 +54,13 @@ class EditPlayBooks extends Component
             'url' => $this->url,
         ]);
 
+        PlayBookAdded::dispatch(\App\Models\PlayBooks::findOrFail($this->selected));
+
         $this->resetForm();
-        PlayBookAdded::dispatch($playBook);
 
         $this->updated = true;
+
+        return redirect()->to(route('dashboard.playbooks'));
     }
 
 

@@ -13,6 +13,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">URL</label>
+            <span class="text-muted">Like : https://api.github.com/repos/B14ckP4nd4/ansiblemaster-playbooks/contents/radius/final.yml</span>
             <input type="text" wire:model="url" class="form-control" name="example-text-input"
                    placeholder="Enter PlayBook URL">
             @error('val') <span class="error">{{ $message }}</span> @enderror

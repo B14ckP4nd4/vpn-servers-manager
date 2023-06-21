@@ -133,7 +133,7 @@ class AnsibleFileManager
      */
     public static function parsePlayLog($content)
     {
-        preg_match_all("%((?<host>[\d{1,3}\.]+).*ok=(?<ok>\d+).*changed=(?<changed>\d+).*unreachable=(?<unreachable>\d+).*skipped=(?<skipped>\d+).*rescued=(?<rescued>\d+).*ignored=(?<ignored>\d+)\s+?)%m",$content,$matches);
+        preg_match_all("%((?<host>[\d{1,3}\.]+).*ok=(?<ok>\d+).*changed=(?<changed>\d+).*unreachable=(?<unreachable>\d+).*failed=(?<failed>\d+).*skipped=(?<skipped>\d+).*rescued=(?<rescued>\d+).*ignored=(?<ignored>\d+)\s+?)%m",$content,$matches);
 
         if(empty($matches))
             return false;
@@ -147,6 +147,7 @@ class AnsibleFileManager
                 'ok' => $matches['ok'][$i],
                 'changed' => $matches['changed'][$i],
                 'unreachable' => $matches['unreachable'][$i],
+                'failed' => $matches['failed'][$i],
                 'skipped' => $matches['skipped'][$i],
                 'rescued' => $matches['rescued'][$i],
                 'ignored' => $matches['ignored'][$i],

@@ -30,6 +30,19 @@
                                     </svg>
                                     Create New Inventory Item
                                 </a>
+                                <a x-data @click="window.Livewire.emitTo('group-add-item','createItem')" href="#"
+                                   class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                                   data-bs-target="#group-add-item-modal">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                         stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <line x1="12" y1="5" x2="12" y2="19"/>
+                                        <line x1="5" y1="12" x2="19" y2="12"/>
+                                    </svg>
+                                    Add inventory as group
+                                </a>
                                 <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
                                    data-bs-target="#modal-report" aria-label="Create new report">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
@@ -55,6 +68,7 @@
                                     <h3 class="card-title">Inventory Items</h3>
                                 </div>
                                 <livewire:inventory-items-list></livewire:inventory-items-list>
+
                                 <!-- inventory item remove modal -->
                                 <div class="modal modal-blur fade" id="model_remove" tabindex="-1"
                                      aria-hidden="true" x-data="{ x : 2}">
@@ -77,6 +91,14 @@
 
                                     <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                                         <livewire:inventory-items-form-modal></livewire:inventory-items-form-modal>
+                                    </div>
+                                </div>
+
+                                <div x-date @click.away="window.Livewire.emitTo('group-add-item','cancel')" class="modal modal-blur fade" id="group-add-item-modal" tabindex="-1" role="dialog"
+                                     aria-hidden="true">
+
+                                    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                                        @livewire('group-add-item')
                                     </div>
                                 </div>
                             </div>

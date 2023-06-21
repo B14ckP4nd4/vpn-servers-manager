@@ -1,4 +1,4 @@
-<div>
+<div wire:poll.10s>
     <div class="table-responsive">
         <table class="table card-table table-vcenter text-nowrap datatable">
             <thead>
@@ -14,7 +14,6 @@
                     </svg>
                 </th>
                 <th>Inventory</th>
-                <th>PlayBook</th>
                 <th>Stats</th>
                 <th>Status</th>
                 <th></th>
@@ -28,18 +27,22 @@
                         <span class="text-muted">{{$play->id}}</span>
                     </td>
                     <td>
-                        {{$play->inventory()->first()->name}}
+                        {{$play->inventory()->first()->name}}<br/>
+                        <span class="text-muted">{{ $play->playbook()->first()->name }}</span>
+                        <span class="text-muted d-block">{{ implode(',',$play->inventory()->first()->items()->pluck('server')->toArray()) }}</span>
                     </td>
                     <td>
-                        {{ $play->playbook()->first()->name }}
-                    </td>
-                    <td>
-                        <span class="text-success">OK : {{$play->ok}}</span> ,
-                        <span class="text-indigo">Changed : {{$play->changed}}</span> ,
-                        <span class="text-danger">Unreachable : {{$play->unreachable}}</span> ,
-                        <span class="text-warning">Skipped : {{$play->skipped}}</span> ,
-                        <span class="text-green-600">Rescued : {{$play->rescued}}</span> ,
-                        <text class="text-muted">Ignored : {{$play->ignored}}</text>
+{{--                        <span class="text-success">OK : {{$play->ok}}</span> ,--}}
+{{--                        <span class="text-indigo">Changed : {{$play->changed}}</span> ,--}}
+{{--                        <span class="text-danger">Unreachable : {{$play->unreachable}}</span> ,--}}
+{{--                        <span class="text-danger">Failed : {{$play->failed}}</span> ,--}}
+{{--                        <span class="text-warning">Skipped : {{$play->skipped}}</span> ,--}}
+{{--                        <span class="text-green-600">Rescued : {{$play->rescued}}</span> ,--}}
+{{--                        <text class="text-muted">Ignored : {{$play->ignored}}</text>--}}
+
+                        <span class="font-semibold" data-bs-toggle="tooltip" data-html="true" title="OK : {{$play->ok}} , Changed : {{$play->changed}} , Unreachable : {{$play->unreachable}} , Failed : {{$play->failed}} , Skipped : {{$play->skipped}} , Rescued : {{$play->rescued}} , Ignored : {{$play->ignored}} " >
+                            Play Stats
+                        </span>
                     </td>
                     <td>
                         @if($play->is_running)
@@ -54,6 +57,21 @@
                             </svg>
                             Running...
                             <div class="font-semibold">{{$play->run_at}}</div>
+                        @elseif($play->is_crashed)
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-car-crash"
+                                 width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#c00"
+                                 fill="none"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <circle cx="10" cy="17" r="2"></circle>
+                                <path d="M7 6l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-5m0 -6h8m-6 0v-5m2 0h-4"></path>
+                                <path d="M14 8v-2"></path>
+                                <path d="M19 12h2"></path>
+                                <path d="M17.5 15.5l1.5 1.5"></path>
+                                <path d="M17.5 8.5l1.5 -1.5"></path>
+                            </svg>
+                            <span class="font-semibold"> Crashed </span>
+                            <div class="text-start text-muted small">{{$play->completed_at}}</div>
                         @elseif(!$play->is_running && !$play->completed_at)
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time"
                                  width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff9300"
@@ -134,6 +152,19 @@
                                     d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"/>
                             </svg>
                             Logs
+                        </a>
+                        <a
+                            x-data @click="window.Livewire.emitTo('replay-play','selectForReplay',{{$play->id}})"
+                            data-bs-toggle="modal"
+                            data-bs-target="#replay-modal"
+                            class="m-0 p-2 btn btn-outline-success">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <desc>Download more icon variants from https://tabler-icons.io/i/rotate</desc>
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M19.95 11a8 8 0 1 0 -.5 4m.5 5v-5h-5"></path>
+                            </svg>
+                            Replay
                         </a>
                     </td>
                 </tr>

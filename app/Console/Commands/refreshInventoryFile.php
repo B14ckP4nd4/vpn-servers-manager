@@ -101,6 +101,13 @@ class refreshInventoryFile extends Command
                 ]);
             }
 
+            $inventoryVariables = array_merge($inventoryVariables,[
+                [
+                    'name' => 'ansible_ssh_common_args',
+                    'val' => '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand="ssh -W %h:%p -q Tunnel -p 22"',
+                ],
+            ]);
+
             // generate inventory file Content
             $content = AnsibleFileManager::generateInventoryFile($inventoryHosts , $inventoryVariables);
 

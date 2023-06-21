@@ -53,9 +53,6 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Plays</h3>
-                                    <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
-                                        Tooltip with HTML
-                                    </button>
                                 </div>
                                 <livewire:plays></livewire:plays>
                             </div>
@@ -115,6 +112,23 @@
                             </div>
                         </div>
                         <!-- end playbook remove modal -->
+
+                        <!-- playbook replay-play modal -->
+                        <div class="modal modal-blur fade" id="replay-modal" tabindex="-1"
+                             aria-hidden="true" x-data>
+                            <div @click-away="window.livewire.emitTo('replay-play','pleaseRefresh');"
+                                 class="modal-dialog modal-sm modal-dialog-centered" role="document">
+
+                                <div x-data class="modal-content">
+                                    <button @click="window.livewire.emitTo('replay-play','pleaseRefresh');" type="button" class="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    <div class="modal-status bg-danger"></div>
+                                    <livewire:replay-play></livewire:replay-play>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end playbook replay-play modal -->
 
 
                         <!-- end modals -->
